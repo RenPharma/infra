@@ -28,3 +28,17 @@ variable "github_org" {
   type        = string
 }
 
+variable "github_owner_id" {
+  description = "Immutable GitHub owner ID used in OIDC subject claims"
+  type        = string
+}
+
+variable "github_frontend_repo_id" {
+  description = "Immutable GitHub repository ID for the frontend repository"
+  type        = string
+}
+
+variable "github_backend_repo_id" {
+  description = "Immutable GitHub repository ID for the backend repository"
+  type        = string
+}
