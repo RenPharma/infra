@@ -28,10 +28,7 @@ resource "aws_iam_openid_connect_provider" "github_actions" {
 
 data "aws_iam_policy_document" "github_actions_assume_role" {
   statement {
-    actions = [
-      "sts:AssumeRoleWithWebIdentity",
-      "sts:TagSession",
-    ]
+    actions = ["sts:AssumeRoleWithWebIdentity"]
     effect  = "Allow"
 
     principals {
@@ -51,10 +48,8 @@ data "aws_iam_policy_document" "github_actions_assume_role" {
       values = [
         "repo:${var.github_org}/frontend:ref:refs/heads/main",
         "repo:${var.github_org}/frontend:ref:refs/heads/develop",
-        "repo:${var.github_org}/frontend:ref:refs/heads/release/*",
         "repo:${var.github_org}/backend:ref:refs/heads/main",
         "repo:${var.github_org}/backend:ref:refs/heads/develop",
-        "repo:${var.github_org}/backend:ref:refs/heads/release/*",
       ]
     }
   }
@@ -80,9 +75,9 @@ resource "aws_iam_policy" "github_actions_ci_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid      = "ECRAuth"
-        Effect   = "Allow"
-        Action   = ["ecr:GetAuthorizationToken"]
+        Sid    = "ECRAuth"
+        Effect = "Allow"
+        Action = ["ecr:GetAuthorizationToken"]
         Resource = "*"
       },
       {
